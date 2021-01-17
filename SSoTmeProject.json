@@ -9,7 +9,7 @@
     {
       "ProjectSettingId": "b17e1e72-4004-4f8a-8705-f26d4736dd40",
       "Name": "amqps",
-      "Value": "amqps://smqPublic:smqPublic@sassyapi-rmq.ssot.me/your-effortlessapi-endpoint"
+      "Value": "amqps://smqPublic:smqPublic@sassyapi-rmq.ssot.me/ej-tictactoe-demo"
     },
     {
       "ProjectSettingId": "242425b4-fd71-4803-b244-3a4c1ec72906",

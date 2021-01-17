@@ -70,9 +70,9 @@ To connect your new repository to your effortless API Endpoint, run these comman
 
     > npm install
     
-*Your Project URL is in Effortless API: Insert "Your-Project-Name" (Ex. amqps://smqPublic:smqPublic@/**YOURPROJECTNAME**)*
+*Your Project URL is in Effortless API: Insert "ej-tictactoe-demo" (Ex. amqps://smqPublic:smqPublic@/ej-tictactoe-demo)*
 
-    > ssotme -init -name=YOURPROJECT/FOLDERNAME -addSetting amqps=amqps://smqPublic:smqPublic@effortlessapi-rmq.ssot.me/YOUR-PROJECT-NAME-URL -addSetting dataclasses-namespace=YOURPROJECT/FOLDERNAME.Lib.DataClasses
+    > ssotme -init -name=ejtictactoedemo -addSetting amqps=amqps://smqPublic:smqPublic@effortlessapi-rmq.ssot.me/ej-tictactoe-demo -addSetting dataclasses-namespace=ejtictactoedemo.Lib.DataClasses
 
     > ssotme -build
 
@@ -82,11 +82,11 @@ Use the following instructions to tailor the example for your project.
 
     1. Start VS Code.  On Windows that command is 'code .'.  
     2. Open the `src/app/app-modules.ts` lines 70 to configure your EAPI Endpoint
-    2A. Grab YOUR-PROJECT-NAME from the URL in Effortless API (Ex. amqps://smqPublic:smqPublic@/YOURPROJECTNAME)
+    2A. Grab YOUR-PROJECT-NAME from the URL in Effortless API (Ex. amqps://smqPublic:smqPublic@effortlessapi-rmq-ssot.me/ej-tictactoe-demo)
     2B. Maybe fix Roles configuration.
-    3. Be sure that angular CLI is installed: 
-    4. From the command line, once the `npm install` and `ssotme -build` have completed, run `ng serve`
-    5. Open http://localhost:4200 in a browser
+    1. Be sure that angular CLI is installed: 
+    2. From the command line, once the `npm install` and `ssotme -build` have completed, run `ng serve`
+    3. Open http://localhost:4200 in a browser
     
 
 This will create a local typescript sdk for your EffortlesAPI endpoint - allowing you to immediately begin writing code:

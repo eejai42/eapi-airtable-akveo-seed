@@ -67,7 +67,7 @@ export class AppModule {
       return { "AccessToken": gds.accessToken };
     }
 
-    gds.vhost = "your-project-endpoint";
+    gds.vhost = "ej-tictactoe-demo";
     gds.smqUsername = "smqPublic";
     gds.smqPassword = "smqPublic";
 
