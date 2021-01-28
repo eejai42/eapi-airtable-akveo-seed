@@ -84,7 +84,7 @@ export class GDS {
   connect() {
     console.log("LOADING ALL DATA");
     var gds = this;
-    var currentRolesAssigned = gds.whoAmI ? gds.whoAmI.Role : [];
+    var currentRolesAssigned = gds.whoAmI ? gds.whoAmI.Roles : [];
 
     if (!gds.whoAmI || !currentRolesAssigned) {
       console.error('ERROR AUTHENTICATING - WHOAMI: ', gds.whoAmI);

@@ -1,1 +1,0 @@
-﻿These scripts allow the actors to interact with the messaging system from JavaScript

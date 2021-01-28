@@ -4,7 +4,7 @@
   "CurrentPath": "",
   "SaveDisabled": false,
   "SSoTmeProjectId": "aeef2e28-64c4-4305-b6eb-25b51422f07a",
-  "Name": "AllMyShows",
+  "Name": "ejtictactoedemo",
   "ProjectSettings": [
     {
       "ProjectSettingId": "b17e1e72-4004-4f8a-8705-f26d4736dd40",
@@ -12,9 +12,9 @@
       "Value": "amqps://smqPublic:smqPublic@sassyapi-rmq.ssot.me/ej-tictactoe-demo"
     },
     {
-      "ProjectSettingId": "242425b4-fd71-4803-b244-3a4c1ec72906",
+      "ProjectSettingId": "5ad321b2-3def-4fc0-9e9b-285a6fbbe3ec",
       "Name": "project-name",
-      "Value": "YOUR_PROJECT_NAME"
+      "Value": "ejtictactoedemo"
     }
   ],
   "ProjectTranspilers": [
@@ -42,9 +42,9 @@
     },
     {
       "MatchedTranspiler": {
-        "TranspilerId": "4b713f03-1d9f-42f2-b02f-e3cdbd237bb3",
-        "Name": "XmlXsltTransform",
-        "Description": "Given an Xml and Xslt file, will process and \"split\" a resulting fileset."
+        "TranspilerId": "be14a6b8-d25e-4f09-b145-1a4b4a911b17",
+        "Name": "ODXMLToEffortlessApiTypescriptEndpoint",
+        "Description": "ODXML To Effortless Api Typescript Endpoint"
       },
       "ProjectTranspilerId": "0840aa2c-b6fe-442a-a35a-b51322544359",
       "Name": "XmlXsltTransform",
