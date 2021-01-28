@@ -72,8 +72,6 @@ export class <xsl:value-of select="$od/PluralName" />Component extends Effortles
     this.allowDelete = !!user.Delete<xsl:value-of select="$od/Name" />;
     this.allowAdd = !!user.Add<xsl:value-of select="$od/Name" />;
     this.reload(this);
-
-
   }
 
   filterNow() {
@@ -289,6 +287,7 @@ export class <xsl:value-of select="$od/Name" />Component extends EffortlessCompo
     this.route.params.pipe(take(1)).subscribe(params => {
       this.id = params['<xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />Id'];
       this.reload(this);
+      this.allowSave = !!(this.gds.smqUser || this.gds.smqGuest)['UpdateTheater'];
     });
   }
 
