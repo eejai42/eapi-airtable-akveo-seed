@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               public gds: GDS) {
 
 
-                this.gds.readiness$.subscribe(ready => {
+                this.gds.onReady().pipe(take(1)).subscribe(ready => {
                   console.error("GDS READINESS", this.gds.whoAmI);
                   this.userMenu = [ { title: 'Profile', link: '/effortless/profile', hidden: !this.gds.whoAmI }, { title: this.gds.whoAmI ? 'Log out' : 'Log in', link: this.gds.whoAmI ? '/auth/logout' : '/auth/login' } ];
                 })

@@ -46,13 +46,13 @@ export class EffortlessComponentBase implements OnDestroy, OnInit {
 
     goToDashboard(router: Router, toastr: NbToastrService) {
 
-        var url = '/pages/effortlessapi/dashboard-guest';
+        var url = '/effortless';
             setTimeout(() => {
                 if ((router.url == "/") || (router.url == url)) {
     
-                    if (this.gds.isAdmin) url = 'pages/effortlessapi/dashboard-admin';
-                    else if (this.gds.isEmployee) url = 'pages/effortlessapi/dashboard-employee';
-    
+                    if (this.gds.whoAmI) url = '/effortless/data';
+                    else url = "/effortless/page1"
+                    
                     router.navigateByUrl(url);
                 }
             }, 1500)

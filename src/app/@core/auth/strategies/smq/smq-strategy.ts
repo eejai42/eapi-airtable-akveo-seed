@@ -282,7 +282,11 @@ export class SmqAuthStrategy extends NbAuthStrategy {
     this.gds.logout();
     var gds = this.gds;
     gds.firstLoad = true;
-    if (gds.smqUser) gds.smqUser.disconnect();
+    if (gds.smqUser) {
+      gds.smqUser.disconnect();
+      delete gds.smqUser;
+    }
+    
     // TODO: Need to clear the endpoint connections as well if they are long running
     const module = 'logout';
     const method = this.getOption(`${module}.method`);

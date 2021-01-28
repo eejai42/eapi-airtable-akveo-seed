@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GDS } from '../services/gds.service';
 
 @Component({
   selector: 'ngx-page1',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Page1Component implements OnInit {
 
-  constructor() { }
+  constructor(public gds : GDS) { }
 
   ngOnInit() {
   }
