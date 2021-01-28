@@ -82,7 +82,7 @@ export class GDS {
   }
 
   connect() {
-    console.log("LOADING ALL DATA");
+    console.error("LOADING ALL DATA.");
     var gds = this;
     var currentRolesAssigned = gds.whoAmI ? gds.whoAmI.Roles : [];
 
@@ -123,16 +123,21 @@ export class GDS {
     }
 
 
-    gds.smqUser.rabbitEndpoint = gds.rabbitEndpoint;
+    if (gds.smqUser) {
+      gds.smqUser.rabbitEndpoint = gds.rabbitEndpoint;
 
-    gds.smqUser.connect(gds.vhost, gds.smqUsername, gds.smqPassword, function () { }, function () {
+      gds.smqUser.connect(gds.vhost, gds.smqUsername, gds.smqPassword, function () { }, function () {
+        gds.isGuestConnected = true;
+        gds.readiness$.next({});
+      });
+
+      gds.smqUser.createPayload = gds.smqUser.createPayload || function () {
+        return { "AccessToken": gds.smqUser.accessToken || gds.accessToken };
+      };
+    } else {
       gds.isGuestConnected = true;
       gds.readiness$.next({});
-    });
-
-    gds.smqUser.createPayload = gds.smqUser.createPayload || function () {
-      return { "AccessToken": gds.smqUser.accessToken || gds.accessToken };
-    };
+    }
   }
 }
 

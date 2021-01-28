@@ -40,7 +40,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Login',
     icon: 'shield-outline',
     link: '/auth/login',
-    hidden: false,
+    hidden: true,
     expanded: false,
   },
 ];

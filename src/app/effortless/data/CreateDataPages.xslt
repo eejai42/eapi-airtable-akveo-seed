@@ -55,6 +55,8 @@ export class <xsl:value-of select="$od/PluralName" />Component extends Effortles
   searchText : string = '';
   <xsl:value-of select="translate($od/PluralName, $ucletters, $lcletters)" />: any[] = [];
   filtered<xsl:value-of select="$od/PluralName" />: any;
+  allowDelete : boolean = false;
+  allowAdd : boolean = false;
 
   constructor(public gds : GDS, public data : DataEndpoint, public route : ActivatedRoute, 
             protected menuService : NbMenuService, public router : Router, public dialogService: NbDialogService) { 
@@ -66,7 +68,12 @@ export class <xsl:value-of select="$od/PluralName" />Component extends Effortles
   }
 
   onGdsReady() {
+    var user = this.gds.smqUser || this.gds.smqGuest;
+    this.allowDelete = !!user.Delete<xsl:value-of select="$od/Name" />;
+    this.allowAdd = !!user.Add<xsl:value-of select="$od/Name" />;
     this.reload(this);
+
+
   }
 
   filterNow() {
@@ -91,15 +98,17 @@ export class <xsl:value-of select="$od/PluralName" />Component extends Effortles
   }
 
   delete<xsl:value-of select="$od/Name" />(<xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />ToDelete) {
-    var payload = this.gds.createPayload();
-    payload.<xsl:value-of select="$od/Name" /> = <xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />ToDelete;
-    this.gds.smqUser.Delete<xsl:value-of select="$od/Name" />(payload).then((reply) => {
-      if (reply.ErrorMessage) {
-        alert(reply.ErrorMessage)
-      } else {
-        this.reload(this)
-      }
-    })
+    if (confirm('Are you sure?')) {
+      var payload = this.gds.createPayload();
+      payload.<xsl:value-of select="$od/Name" /> = <xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />ToDelete;
+      this.gds.smqUser.Delete<xsl:value-of select="$od/Name" />(payload).then((reply) => {
+        if (reply.ErrorMessage) {
+          alert(reply.ErrorMessage)
+        } else {
+          this.reload(this)
+        }
+      });
+    }
   }
    
   add<xsl:value-of select="$od/Name" />(<xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />ToAdd) {
@@ -141,7 +150,7 @@ export class <xsl:value-of select="$od/PluralName" />Component extends Effortles
     &lt;/button>
     <h4 style="float: left; margin: 4px 0px;"><xsl:value-of select="$od/PluralName" /></h4>
     &lt;button nbButton ghost nbTooltip="Add <xsl:value-of select="$od/Name" />" class="float-right" style="margin: 4px 0px" size="tiny"
-      (click)="openAddDialog()">
+      (click)="openAddDialog()" *ngIf="allowAdd">
       <nb-icon style="margin-right: 4px;" icon="plus-square-outline"></nb-icon>
       <span>Add</span>
     &lt;/button>
@@ -159,7 +168,7 @@ export class <xsl:value-of select="$od/PluralName" />Component extends Effortles
           {{ <xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />?.Name }}
         &lt;/p>
         &lt;button nbButton nbTooltip="Delete" class="float-right" size="tiny" status="danger"
-          (click)="delete<xsl:value-of select="$od/Name" />(<xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />)">
+          *ngIf="allowDelete" (click)="delete<xsl:value-of select="$od/Name" />(<xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />)">
           <nb-icon icon="trash-2-outline"></nb-icon>
         &lt;/button>
         &lt;button nbButton nbTooltip="View <xsl:value-of select="$od/Name" />" class="float-right" style="margin-right: 8px;" size="tiny"
@@ -201,6 +210,8 @@ export class <xsl:value-of select="$od/Name" />Component extends EffortlessCompo
   mySchema: any;
   editor: any;
   private doc: any;
+  allowSave : boolean = false;
+  
   
   constructor(public gds : GDS, public data : DataEndpoint, public route : ActivatedRoute, 
             protected toastr : NbToastrService, protected menuService : NbMenuService, public router : Router,
@@ -319,7 +330,7 @@ export class <xsl:value-of select="$od/Name" />Component extends EffortlessCompo
                 &lt;/button>
                 <h4 style="float: left; margin: 4px 0px;">{{ (<xsl:value-of select="translate($od/Name, $ucletters, $lcletters)" />$ | async)?.Name }} Summary</h4>
                 &lt;button nbButton ghost nbTooltip="Save" class="float-right" style="padding: 8px; margin: 1px 0px;"
-                    (click)="save()">
+                    (click)="save()" *ngIf="allowSave">
                     <nb-icon icon="save-outline"></nb-icon>
                     <span>Save</span>
                 &lt;/button>

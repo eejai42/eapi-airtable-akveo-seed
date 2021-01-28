@@ -12,8 +12,9 @@ import { Page3Component } from './page3/page3.component';
 import { DerivedDataDeclarations } from './data/derived-data-declarations';
 import { DataComponent } from './data/data.component';
 import { JsonEditorModule } from 'ng2-json-editor';
+import { ProfileComponent } from './profile/profile.component';
 
-let declarations: any[] = [EffortlessComponent, ReloadWidgetComponent, Page1Component, Page2Component, Page3Component, DataComponent];
+let declarations: any[] = [EffortlessComponent, ReloadWidgetComponent, Page1Component, Page2Component, Page3Component, DataComponent, ProfileComponent];
 DerivedDataDeclarations.derivedDeclarations.forEach(feDeclaration => declarations.push(feDeclaration));
 
 @NgModule({

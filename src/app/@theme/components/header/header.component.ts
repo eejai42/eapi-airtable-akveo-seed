@@ -51,8 +51,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private breakpointService: NbMediaBreakpointsService,
               private authService: NbAuthService,
               public gds: GDS) {
+
+
+                this.gds.readiness$.subscribe(ready => {
+                  console.error("GDS READINESS", this.gds.whoAmI);
+                  this.userMenu = [ { title: 'Profile', link: '/effortless/profile', hidden: !this.gds.whoAmI }, { title: this.gds.whoAmI ? 'Log out' : 'Log in', link: this.gds.whoAmI ? '/auth/logout' : '/auth/login' } ];
+                })
+
                 this.authService.onAuthenticationChange()
-                .subscribe(value => this.isAuthenticated = value);
+                .subscribe(value => {
+                  this.isAuthenticated = value;
+                  console.error('authentication changed', value, this.gds.whoAmI);
+                  this.userMenu = [ { title: 'Profile', link: '/effortless/profile', hidden: !this.gds.whoAmI }, { title: this.gds.whoAmI ? 'Log out' : 'Log in', link: this.gds.whoAmI ? '/auth/logout' : '/auth/login' } ];
+                });
           
                 this.authService.onTokenChange()
                 .subscribe((token: NbAuthJWTToken) => {
@@ -62,8 +73,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
                     (map(i => start - i)).pipe(take(start + 1))
                     .subscribe(i => this.tokenTime=(i-(i%=60))/60+(9<i?':':':0')+i);
                   }
+                  this.userMenu = [ { title: 'Profile', link: '/effortless/profile', hidden: !this.gds.whoAmI }, { title: this.gds.whoAmI ? 'Log out' : 'Log in', link: this.gds.whoAmI ? '/auth/logout' : '/auth/login' } ];
                 });
-                this.userMenu = [ { title: 'Profile' }, { title: this.isAuthenticated ? 'Log out' : 'Log in', link: this.isAuthenticated ?'/auth/logout':'/auth/login' } ];
+
   }
 
   ngOnInit() {
@@ -87,6 +99,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+      
+
   }
 
   ngOnDestroy() {

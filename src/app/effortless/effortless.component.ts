@@ -6,6 +6,7 @@ import { NbMenuService, NbMenuItem, NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 import { DataEndpoint } from './services/eapi-data-services/data-endpoint/data-endpoint';
 import { EffortlessComponentBase } from './efforless-base-component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-effortless',
@@ -22,6 +23,9 @@ export class EffortlessComponent extends EffortlessComponentBase implements OnIn
     protected menuService: NbMenuService, public router: Router) {
     super(gds, data, menuService)
     // this.items = this.getMenu();
+    gds.onReady().pipe(take(1)).subscribe(ready => {
+      this.menu[4].hidden = this.gds.whoAmI;
+    });
     
   }
 
